@@ -16,7 +16,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     Optional<Usuario> findByEmail(String email);
 
-    //metedo para deletar usuario por email, usa @transactional para nao haver erros.
+
     @Transactional
     void deleteByEmail (String email);
 }
