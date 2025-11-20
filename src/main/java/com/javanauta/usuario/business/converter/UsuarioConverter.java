@@ -105,5 +105,17 @@ public class UsuarioConverter {
                 .build();
     }
 
+    public Usuario updateUsuario (UsuarioDTO usuario, Usuario entity){
+        return Usuario.builder()
+                .id(entity.getId())
+                .nome(usuario.getNome() != null ? usuario.getNome() : entity.getNome())
+                .senha(usuario.getSenha() != null ? usuario.getSenha() : entity.getSenha())
+                .email(usuario.getEmail() != null ? usuario.getEmail() : entity.getEmail())
+                .enderecos(entity.getEnderecos())
+                .telefones(entity.getTelefones())
+
+                .build();
+    }
+
 
 }
