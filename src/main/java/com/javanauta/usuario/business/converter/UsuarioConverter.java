@@ -60,13 +60,13 @@ public class UsuarioConverter {
     }
 
 
-    public UsuarioDTO paraUsuarioDTO(Usuario usuarioDTO){
+    public UsuarioDTO paraUsuarioDTO(Usuario usuario){
         return UsuarioDTO.builder()
-                .nome(usuarioDTO.getNome())
-                .senha(usuarioDTO.getSenha())
-                .email(usuarioDTO.getEmail())
-                .enderecos(paraListaEnderecoDTO(usuarioDTO.getEnderecos()))
-                .telefones(paraListaTelefoneDTO(usuarioDTO.getTelefones()))
+                .nome(usuario.getNome())
+                .senha(usuario.getSenha())
+                .email(usuario.getEmail())
+                .enderecos(paraListaEnderecoDTO(usuario.getEnderecos()))
+                .telefones(paraListaTelefoneDTO(usuario.getTelefones()))
 
 
                 .build();
@@ -79,14 +79,15 @@ public class UsuarioConverter {
 
     }
 
-    public EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO){
+    public EnderecoDTO paraEnderecoDTO(Endereco endereco){
         return EnderecoDTO.builder()
-                .rua(enderecoDTO.getRua())
-                .numero(enderecoDTO.getNumero())
-                .complemento(enderecoDTO.getComplemento())
-                .cep(enderecoDTO.getCep())
-                .cidade(enderecoDTO.getCidade())
-                .estado(enderecoDTO.getEstado())
+                .id(endereco.getId())
+                .rua(endereco.getRua())
+                .numero(endereco.getNumero())
+                .complemento(endereco.getComplemento())
+                .cep(endereco.getCep())
+                .cidade(endereco.getCidade())
+                .estado(endereco.getEstado())
 
                 .build();
     }
@@ -97,22 +98,45 @@ public class UsuarioConverter {
 
 
 
-    public TelefoneDTO paraTelefoneDTO (Telefone telefoneDTO){
+    public TelefoneDTO paraTelefoneDTO (Telefone telefone){
         return TelefoneDTO.builder()
-                .ddd(telefoneDTO.getDdd())
-                .numero(telefoneDTO.getNumero())
+                .id(telefone.getId())
+                .ddd(telefone.getDdd())
+                .numero(telefone.getNumero())
 
                 .build();
     }
 
-    public Usuario updateUsuario (UsuarioDTO usuario, Usuario entity){
+    public Usuario updateUsuario (UsuarioDTO dto, Usuario entity){
         return Usuario.builder()
                 .id(entity.getId())
-                .nome(usuario.getNome() != null ? usuario.getNome() : entity.getNome())
-                .senha(usuario.getSenha() != null ? usuario.getSenha() : entity.getSenha())
-                .email(usuario.getEmail() != null ? usuario.getEmail() : entity.getEmail())
+                .nome(dto.getNome() != null ? dto.getNome() : entity.getNome())
+                .senha(dto.getSenha() != null ? dto.getSenha() : entity.getSenha())
+                .email(dto.getEmail() != null ? dto.getEmail() : entity.getEmail())
                 .enderecos(entity.getEnderecos())
                 .telefones(entity.getTelefones())
+
+                .build();
+    }
+
+    public Endereco updateEndereco (EnderecoDTO dto, Endereco entity){
+        return Endereco.builder()
+                .id(entity.getId())
+                .rua(dto.getRua() != null ? dto.getRua() : entity.getRua())
+                .numero(dto.getNumero() != null ? dto.getNumero() : entity.getNumero())
+                .complemento(dto.getComplemento() != null ? dto.getComplemento() : entity.getComplemento())
+                .cep(dto.getCep() != null ? dto.getCep() : entity.getCep())
+                .cidade(dto.getCidade() != null ? dto.getCidade() : entity.getCidade())
+                .estado(dto.getEstado() != null ? dto.getEstado() : entity.getEstado())
+
+                .build();
+    }
+
+    public Telefone updateTelefone (TelefoneDTO dto, Telefone entity){
+        return Telefone.builder()
+                .id(entity.getId())
+                .ddd(dto.getDdd() != null ? dto.getDdd() : entity.getDdd())
+                .numero(dto.getNumero() != null ? dto.getNumero() : entity.getNumero())
 
                 .build();
     }
