@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.time.LocalDateTime;
 
 // Define a classe JwtRequestFilter, que estende OncePerRequestFilter
@@ -93,7 +94,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         try {
             return objectMapper.writeValueAsString(errorResponseDTO);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new UncheckedIOException("Erro ao serializar o objeto para JSON", e);
         }
 
 
